@@ -1,33 +1,43 @@
+/* eslint-disable react/jsx-key */
+
+import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
+import { axiosInstance } from "../lib/axios"; //baseUrl nya ada di lib/axios.js
+import { Skeleton } from "../components/ui/skeleton";
 
 
-const productRaw = [
-    {
-        name: "t-shirt Navy Blue",
-        price: 50000,
-        imageUrl: "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/54a991407ef8936e75e8d4bdb1da600b/helix/01-CHAMPION-AAJV6CMPA-CMPC3X301BLK-Black.jpg?x-oss-process=image/format,webp",
-        stock: 4,
-    },
-    {
-        name: "t-shirt white",
-        imageUrl: "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/87be003ef93d1ad0e5b0e74daedfc3bc/helix/01-CHAMPION-AAJV6CMPA-CMPC3X301WHT-White.jpg?x-oss-process=image/format,webp",
-        price: 150000,
-        stock: 0,
-    },
-];
 
 const HomePages = () => {
-    const products = productRaw.map((product, id) => {
+    const [productsIsLoading, setProductsIsLoading] = useState(false) //untuk loading....
+    const [products, setProducts] = useState([])
+    const productsList = products.map((product) => {
         return (
             <ProductCard
-                key={id}  // Menambahkan key di sini
-                imageUrl={product.imageUrl}
+                id={product.id} // bukan id dari db.json
                 name={product.name}
-                stock={product.stock}
                 price={product.price}
+                imageUrl={product.imageUrl}
+                stock={product.stock}
             />
-        )
-    })
+        );
+    });
+
+    const fetchProducts = async () => {
+        setProductsIsLoading(true)
+        try {
+            const response = await axiosInstance.get("/products")
+            console.log(response.data)
+            setProducts(response.data)
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setProductsIsLoading(false)
+        }
+    }
+    // Fetch Product data once, when home page is first mounted
+    useEffect(() => {
+        fetchProducts()
+    }, [])
     return (
         <>
             <main className="min-h-[80vh] max-w-screen-md mx-auto px-4 mt-8">
@@ -40,11 +50,19 @@ const HomePages = () => {
                         ensures yours confidence throughout your days.
                     </p>
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                    {products}
-                </div>
-
+                {
+                    productsIsLoading ? (
+                        <div className="flex flex-col space-y-2">
+                            <Skeleton className="h-[327px] w-[350px] rounded-xl" />
+                            <div className="space-y-2">
+                                <Skeleton className="h-[24px] w-[320px]" />
+                                <Skeleton className="h-[28px] w-[305px]" />
+                                <Skeleton className="h-[20px] w-[290px]" />
+                            </div>
+                        </div>
+                    )
+                        : (<div className="grid grid-cols-2 gap-4">{productsList}</div>) // conditional Rendering dan Operator Ternary
+                }
             </main>
         </>
     );
