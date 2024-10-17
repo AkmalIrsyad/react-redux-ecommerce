@@ -7,7 +7,9 @@ import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import { axiosInstance } from "../../lib/axios";
 import { useEffect, useState } from "react";
 import { Pagination, PaginationContent, PaginationItem } from "../../components/ui/pagination"
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 
 const ProductManagementPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +17,18 @@ const ProductManagementPage = () => {
 
     const [products, setProducts] = useState([]);
     const [hasNextPage, setHasNextPage] = useState(true)
+    const [ productName, setProductName ] = useState("")
 
+    const searchProduct = () => {
+        if (productName) {
+            searchParams.set("search", productName);
+            setSearchParams(searchParams);   
+        }else{
+            searchParams.delete("search")
+            setSearchParams(searchParams);   
+        }
+        
+    }
 
     const handleNextPage = () => {
         searchParams.set("page", Number(searchParams.get("page")) + 1)
@@ -33,6 +46,7 @@ const ProductManagementPage = () => {
                 params: {
                     _per_page: 5, //limit dari axios
                     _page: Number(searchParams.get("page")),
+                    name: searchParams.get("search") //Kalau ini Kosong, dia akan gak nge-filter by name
                 }
             });
 
@@ -48,7 +62,7 @@ const ProductManagementPage = () => {
         if (searchParams.get("page")) {
             fetchProducts();
         }
-    }, [searchParams.get("page")])
+    }, [searchParams.get("page"), searchParams.get("search")]);
 
     useEffect(() => {
         if (!searchParams.get("page")) {
@@ -62,12 +76,26 @@ const ProductManagementPage = () => {
             title="Product Management"
             description="Managing Our Product"
             rightSection={
+                <Link to="/admin/products/create">
                 <Button>
                     <IoAdd className="h-6 w-6 mr-2" />
                     Add Product
                 </Button>
+                </Link>
             }
         >
+        <div className="mb-8">
+            <Label>Search Product Name</Label>
+            <div className="flex gap-4">
+                <Input  
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                className="max-w-[400px]" 
+                placeholder="Cari..."
+                />
+                <Button onClick={searchProduct}>Search</Button>
+            </div>
+        </div>
             <Table className="p-4 border rounded-md">
                 <TableHeader>
                     <TableRow>
