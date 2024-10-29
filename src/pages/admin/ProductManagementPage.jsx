@@ -3,7 +3,7 @@ import { IoAdd } from "react-icons/io5";
 import { AdminLayout } from "../../components/layout/AdminLayout";
 import { Button } from "../../components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../..//components/ui/table"
-import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
+import { ChevronLeft, ChevronRight, Edit, Trash, } from "lucide-react";
 import { axiosInstance } from "../../lib/axios";
 import { useEffect, useState } from "react";
 import { Pagination, PaginationContent, PaginationItem } from "../../components/ui/pagination"
@@ -38,6 +38,20 @@ const ProductManagementPage = () => {
     const handlePreviousPage = () => {
         searchParams.set("page", Number(searchParams.get("page")) - 1)
         setSearchParams(searchParams)
+    }
+
+    const handleDeleteProduct = async (productId) =>{
+        const shouldDelete = confirm("Are You Sure you want to delete This Product");
+        if (!shouldDelete) {
+            return;
+        }
+        try {
+            await axiosInstance.delete("/products/" + productId);
+            alert("Product Deleted")
+            fetchProducts();
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const fetchProducts = async () => {
@@ -115,9 +129,17 @@ const ProductManagementPage = () => {
                                 <TableCell>Rp{(product.price).toLocaleString("id-ID")}</TableCell>
                                 <TableCell>{product.stock}</TableCell>
                                 <TableCell>
+                                    <div className="flex gap-4">
+                                       <Link to={"/admin/products/edit/" + product.id}>
                                     <Button variant="ghost" size="icon">
-                                        <Ellipsis className="w-6 h-6" />
+                                        <Edit className="w-6 h-6" />
                                     </Button>
+                                    </Link>
+                                    <Button onClick={() => handleDeleteProduct(product.id)} variant="destructive" size="icon">
+                                        <Trash  className="w-6 h-6" />    
+                                    </Button> 
+                                    </div>
+                                    
                                 </TableCell>
                             </TableRow>
                         )
