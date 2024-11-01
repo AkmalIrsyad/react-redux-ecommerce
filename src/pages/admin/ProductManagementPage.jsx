@@ -10,14 +10,16 @@ import { Pagination, PaginationContent, PaginationItem } from "../../components/
 import { Link, useSearchParams } from 'react-router-dom'
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
+import {Checkbox} from "../../components/ui/checkbox";
 
 const ProductManagementPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
 
     const [products, setProducts] = useState([]);
-    const [hasNextPage, setHasNextPage] = useState(true)
-    const [ productName, setProductName ] = useState("")
+    const [hasNextPage, setHasNextPage] = useState(true);
+    const [ productName, setProductName ] = useState("");
+    const [selectedProductIds,setSelectedProductIds] = useState([]);
 
     const searchProduct = () => {
         if (productName) {
@@ -41,16 +43,44 @@ const ProductManagementPage = () => {
     }
 
     const handleDeleteProduct = async (productId) =>{
-        const shouldDelete = confirm("Are You Sure you want to delete This Product");
-        if (!shouldDelete) {
+        const shouldDelete = confirm(`Are You Sure you want to delete ${selectedProductIds.length} This Product?`);
+        if (!shouldDelete) 
             return;
-        }
+            const deletePromises = selectedProductIds.map((productId) => {
+                return axiosInstance.delete("/products/" + productId)
+            })
+            try {
+                await Promise.all(deletePromises)
+                alert(`Successfully Deleted ${selectedProductIds.length} products!`)
+                searchParams.set("page", Number(1));
+                setSearchParams(searchParams);
+                setSelectedProductIds([]);
+                fetchProducts();
+            } catch (err) {
+                console.log(err)
+        };
         try {
             await axiosInstance.delete("/products/" + productId);
             alert("Product Deleted")
             fetchProducts();
         } catch (err) {
             console.log(err)
+        }
+    }
+
+    const handleOnCheckedProduct = (productId,checked) =>{
+        if (checked) {
+            const prevSelectedProductIds = [...selectedProductIds];
+            prevSelectedProductIds.push(productId);
+            setSelectedProductIds(prevSelectedProductIds);
+        }else{
+            const productIdIndex = selectedProductIds.findIndex((id) =>{
+                return id == productId;
+            });
+
+            const prevSelectedProductIds = [...selectedProductIds];
+            prevSelectedProductIds.splice(productIdIndex,1);
+            setSelectedProductIds(prevSelectedProductIds);
         }
     }
 
@@ -90,12 +120,19 @@ const ProductManagementPage = () => {
             title="Product Management"
             description="Managing Our Product"
             rightSection={
-                <Link to="/admin/products/create">
+                <div className="flex gap-2">
+                    { // Conditonal Rendering
+                        selectedProductIds.length ? (
+                           <Button variant="destructive" onClick={handleDeleteProduct} >Delete {selectedProductIds.length} Products</Button> 
+                        ): null}
+                    <Link to="/admin/products/create">
                 <Button>
                     <IoAdd className="h-6 w-6 mr-2" />
                     Add Product
                 </Button>
-                </Link>
+                </Link>  
+                </div>
+              
             }
         >
         <div className="mb-8">
@@ -113,6 +150,7 @@ const ProductManagementPage = () => {
             <Table className="p-4 border rounded-md">
                 <TableHeader>
                     <TableRow>
+                        <TableHead></TableHead>
                         <TableHead>ID</TableHead>
                         <TableHead>Product Name</TableHead>
                         <TableHead>Price</TableHead>
@@ -124,22 +162,21 @@ const ProductManagementPage = () => {
                     {products.map((product) => {
                         return (
                             <TableRow>
+                                <TableCell>
+                                    <Checkbox onCheckedChange={(checked) => handleOnCheckedProduct(product.id,checked)}
+                                        checked={selectedProductIds.includes(product.id)}
+                                        />
+                                </TableCell>
                                 <TableCell>{product.id}</TableCell>
                                 <TableCell>{product.name}</TableCell>
                                 <TableCell>Rp{(product.price).toLocaleString("id-ID")}</TableCell>
                                 <TableCell>{product.stock}</TableCell>
                                 <TableCell>
-                                    <div className="flex gap-4">
                                        <Link to={"/admin/products/edit/" + product.id}>
                                     <Button variant="ghost" size="icon">
                                         <Edit className="w-6 h-6" />
                                     </Button>
                                     </Link>
-                                    <Button onClick={() => handleDeleteProduct(product.id)} variant="destructive" size="icon">
-                                        <Trash  className="w-6 h-6" />    
-                                    </Button> 
-                                    </div>
-                                    
                                 </TableCell>
                             </TableRow>
                         )

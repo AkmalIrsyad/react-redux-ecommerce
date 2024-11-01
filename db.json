@@ -15,94 +15,10 @@
       "stock": 10
     },
     {
-      "id": "4",
-      "name": "hoodie Black",
-      "price": 350000,
-      "imageUrl": "https://i.imgur.com/qbKHjYF.jpg",
-      "stock": 5
-    },
-    {
-      "id": "5",
-      "name": "sneakers Red Edited",
-      "price": 600000,
-      "imageUrl": "https://i.imgur.com/FUCfD4M.jpg",
-      "stock": 10
-    },
-    {
-      "id": "6",
-      "name": "cap Black",
-      "price": 80000,
-      "imageUrl": "https://i.imgur.com/FASy4Te.jpg",
-      "stock": 15
-    },
-    {
-      "id": "7",
-      "name": "socks White",
-      "price": 30000,
-      "imageUrl": "https://i.imgur.com/JH2nrWa.jpg",
-      "stock": 20
-    },
-    {
-      "id": "8",
-      "name": "jacket Gray",
-      "price": 550000,
-      "imageUrl": "https://i.imgur.com/pVHJvS2.jpg",
-      "stock": 3
-    },
-    {
-      "id": "9",
-      "name": "belt Brown",
-      "price": 90000,
-      "imageUrl": "https://i.imgur.com/N4tA2X2.jpg",
-      "stock": 12
-    },
-    {
-      "id": "10",
-      "name": "watch Black",
-      "price": 750000,
-      "imageUrl": "https://i.imgur.com/ij3keZL.jpg",
-      "stock": 7
-    },
-    {
-      "id": "11",
-      "name": "sunglasses Black",
-      "price": 200000,
-      "imageUrl": "https://i.imgur.com/nA7kR7x.jpg",
-      "stock": 9
-    },
-    {
-      "id": "12",
-      "name": "backpack Blue",
-      "price": 500000,
-      "imageUrl": "https://i.imgur.com/qlFf77C.jpg",
-      "stock": 11
-    },
-    {
       "id": "33f0",
       "name": "kaos oblong hitam",
       "price": 25000,
       "stock": 20,
-      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
-    },
-    {
-      "id": "9458",
-      "name": "hoodie putih",
-      "price": 500000,
-      "stock": 5,
-      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
-    },
-    {
-      "id": "596c",
-      "name": "Kevin Julio",
-      "price": 90000,
-      "stock": 1,
-      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
-    },
-    {
-      "id": "317a",
-      "name": "hoodie putih",
-      "price": 10000,
-      "stock": 3,
       "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
     },
     {
@@ -118,6 +34,27 @@
       "price": 50000,
       "stock": 2,
       "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
+    },
+    {
+      "id": "c26c",
+      "name": "LionAir",
+      "price": 100000,
+      "stock": 3,
+      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
+    },
+    {
+      "id": "7b40",
+      "name": "Gogoro",
+      "price": 200000,
+      "stock": 6,
+      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b37aefa0774db1f69664c524a69822f5/helix/01-DIADORA-F34RUDIA0-DIA178050070-White.jpg?x-oss-process=image/format,webp"
+    },
+    {
+      "id": "fc41",
+      "name": "laravel",
+      "price": 300000,
+      "stock": 5,
+      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b37aefa0774db1f69664c524a69822f5/helix/01-DIADORA-F34RUDIA0-DIA178050070-White.jpg?x-oss-process=image/format,webp"
     }
   ]
 }
