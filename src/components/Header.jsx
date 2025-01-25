@@ -3,7 +3,9 @@ import { Button } from "./ui/button"
 import { IoCart, IoHeart } from 'react-icons/io5'
 import { Separator } from './ui/separator'
 import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux"
 export const Header = () => {
+    const userSelector = useSelector(state => state.userPengguna)
     return (
         <header className="h-16 border-b flex items-center justify-between px-8">
             {/* Brand */}
@@ -29,6 +31,7 @@ export const Header = () => {
                 <div className="flex space-x-2">
                     <Button>Login</Button>
                     <Button variant="outline">SignUp</Button>
+                    <p>Hello, {userSelector.username}</p>
                 </div>
             </div>
         </header>

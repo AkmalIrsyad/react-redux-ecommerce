@@ -1,27 +1,6 @@
 {
   "products": [
     {
-      "id": "2",
-      "name": "t-shirt white",
-      "price": 150000,
-      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/87be003ef93d1ad0e5b0e74daedfc3bc/helix/01-CHAMPION-AAJV6CMPA-CMPC3X301WHT-White.jpg?x-oss-process=image/format,webp",
-      "stock": 0
-    },
-    {
-      "id": "3",
-      "name": "hoodie Black",
-      "price": 250000,
-      "imageUrl": "https://i.imgur.com/j5BdQ0q.jpg",
-      "stock": 10
-    },
-    {
-      "id": "33f0",
-      "name": "kaos oblong hitam",
-      "price": 25000,
-      "stock": 20,
-      "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b6b0ba40f9c60a355f0f9dbebde15af2/helix/01-CHAMPION-AAJWSCMPA-CMPCW-W022WH-White.jpg?x-oss-process=image/format,webp"
-    },
-    {
       "id": "adbf",
       "name": "hoodie putih",
       "price": 200000,
@@ -55,6 +34,13 @@
       "price": 300000,
       "stock": 5,
       "imageUrl": "https://bb-scm-prod-pim.oss-ap-southeast-5.aliyuncs.com/products/b37aefa0774db1f69664c524a69822f5/helix/01-DIADORA-F34RUDIA0-DIA178050070-White.jpg?x-oss-process=image/format,webp"
+    },
+    {
+      "id": "e1f7",
+      "name": "Akmal irsyad dwi yulianto",
+      "price": 10000,
+      "stock": 6,
+      "imageUrl": "http://localhost:5173/admin/products/create"
     }
   ]
 }
